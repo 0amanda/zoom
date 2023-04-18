@@ -1,6 +1,7 @@
 // https://codepen.io/amir-s/pen/jzqZdG?editors=0010
 
 let canvas, squares;
+let blue;
 const controls = {
   view: {x: 0, y: 0, zoom: 1},
   viewPos: { prevX: null,  prevY: null,  isDragging: false },
@@ -8,15 +9,20 @@ const controls = {
 
 function setup() {
 	canvas = createCanvas(2550, 1080);
+  pixelDensity(1);
+  blue = new Riso('blue');
   canvas.mouseWheel(e => Controls.zoom(controls).worldZoom(e))
   squares = Square.create(10)
+  background(255,255,255);
+  clearRiso();
 }
 
 function draw() {
-	background(50)
+  background(255);
   translate(controls.view.x, controls.view.y);
   scale(controls.view.zoom)
-  rect(500,500,350,300);
+  blue.rect(500,500,350,300);
+  blue.fill(50);
   squares.forEach(square => square.show());
 }
 
@@ -94,7 +100,7 @@ class Square {
   }
   
   show() {
-    fill(150);
+    fill(0,0,255);
     noStroke();
     rect(this.x, this.y, 100, 100);
   }
